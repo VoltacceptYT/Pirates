@@ -11,16 +11,27 @@ import utils.Settings;
 
 /**
  * Resolution selector: [<] [ 1280x720 ] [>]
- * Built entirely from pixel-art sprites in resolution_ui.png so it matches the
- * rest of the UI (wooden plaque, urm-style arrow buttons, pixel number font).
  */
 public class ResolutionOptions {
 
-	// native (unscaled) sprite sizes inside resolution_ui.png
-	private static final int BTN = 14;
-	private static final int PLAQUE_W = 71, PLAQUE_H = 12;
-	private static final int GLYPH_W = 3, GLYPH_H = 5, GLYPH_GAP = 1;
+	// --- SLICING DIMENSIONS (Fixed at 3x because your sprite sheet is 3x) ---
+	// DO NOT change these to Game.SCALE, or the image will be cut in half!
+	private static final int IMG_SCALE = 3;
+	private static final int BTN = 14 * IMG_SCALE; 
+	private static final int PLAQUE_W = 71 * IMG_SCALE; 
+	private static final int PLAQUE_H = 12 * IMG_SCALE; 
+	private static final int GLYPH_W = 3 * IMG_SCALE; 
+	private static final int GLYPH_H = 5 * IMG_SCALE; 
+	private static final int GLYPH_GAP = 1 * IMG_SCALE; 
 	private static final String GLYPHS = "0123456789x";
+
+	// --- RENDERING DIMENSIONS (The base 480p sizes, multiplied by Game.SCALE) ---
+	private static final int BTN_ORIG = 14;
+	private static final int PLAQUE_W_ORIG = 71;
+	private static final int PLAQUE_H_ORIG = 12;
+	private static final int GLYPH_W_ORIG = 3;
+	private static final int GLYPH_H_ORIG = 5;
+	private static final int GLYPH_GAP_ORIG = 1;
 
 	private final Game game;
 	private final Rectangle leftBounds, rightBounds, labelBounds;
@@ -32,10 +43,12 @@ public class ResolutionOptions {
 		this.game = game;
 		loadImgs();
 
-		int arrowSize = (int) (BTN * Game.SCALE);
-		int labelWidth = (int) (PLAQUE_W * Game.SCALE);
-		int labelHeight = (int) (PLAQUE_H * Game.SCALE);
+		// These dynamic values will now correctly adjust to 1, 2, or 3 based on resolution!
+		int arrowSize = (int) (BTN_ORIG * Game.SCALE);
+		int labelWidth = (int) (PLAQUE_W_ORIG * Game.SCALE);
+		int labelHeight = (int) (PLAQUE_H_ORIG * Game.SCALE);
 		int gap = (int) (4 * Game.SCALE);
+		
 		int totalWidth = arrowSize * 2 + labelWidth + gap * 2;
 		int startX = centerX - totalWidth / 2;
 
@@ -50,6 +63,7 @@ public class ResolutionOptions {
 		leftImgs = new BufferedImage[3];
 		rightImgs = new BufferedImage[3];
 		for (int i = 0; i < 3; i++) {
+			// Slicing using the 3x dimensions (BTN)
 			leftImgs[i] = atlas.getSubimage(i * BTN, 0, BTN, BTN);
 			rightImgs[i] = atlas.getSubimage(i * BTN, BTN, BTN, BTN);
 		}
@@ -72,24 +86,24 @@ public class ResolutionOptions {
 
 	private void drawButton(Graphics g, BufferedImage[] imgs, Rectangle r, boolean over, boolean pressed) {
 		int index = pressed ? 2 : over ? 1 : 0;
+		// Draws the 3x image but scales it down to 2x (720p) or 1x (480p) automatically
 		g.drawImage(imgs[index], r.x, r.y, r.width, r.height, null);
 	}
 
-	/** Draws e.g. "1280x720" with the pixel font, centred on the plaque. */
 	private void drawLabel(Graphics g) {
-		// "1280x720 (720p)" -> "1280x720"
 		String text = Settings.getResolutionLabel();
 		int paren = text.indexOf(' ');
 		if (paren > 0)
 			text = text.substring(0, paren);
 
-		int glyphW = (int) (GLYPH_W * Game.SCALE);
-		int glyphH = (int) (GLYPH_H * Game.SCALE);
-		int gap = (int) (GLYPH_GAP * Game.SCALE);
+		// Calculates text size dynamically based on Game.SCALE
+		int glyphW = (int) (GLYPH_W_ORIG * Game.SCALE);
+		int glyphH = (int) (GLYPH_H_ORIG * Game.SCALE);
+		int gap = (int) (GLYPH_GAP_ORIG * Game.SCALE);
 		int totalW = text.length() * glyphW + (text.length() - 1) * gap;
 
 		int x = labelBounds.x + (labelBounds.width - totalW) / 2;
-		int y = labelBounds.y + (int) (3 * Game.SCALE); // 3px from top: optically centred in the plaque
+		int y = labelBounds.y + (int) (3 * Game.SCALE); // 3px from top (scaled)
 		for (char c : text.toCharArray()) {
 			int idx = GLYPHS.indexOf(c);
 			if (idx >= 0)
