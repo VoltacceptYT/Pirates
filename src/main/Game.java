@@ -8,7 +8,6 @@ import gamestates.Gamestate;
 import gamestates.Menu;
 import gamestates.Playing;
 import ui.AudioOptions;
-import utils.LoadSave;
 import utils.Settings;
 
 public class Game implements Runnable {
@@ -25,13 +24,15 @@ public class Game implements Runnable {
 	private AudioPlayer audioPlayer;
 	
 	public final static int TILES_DEFAULT_SIZE = 32;
-	public final static float SCALE = 3f; // FIXED: Set to 3f for 1080p base
+	
+	// REMOVED 'final' so these can change dynamically
+	public static float SCALE = 3f; 
 	public final static int TILES_IN_WIDTH = 26; 
 	public final static int TILES_IN_HIEGHT = 14; 
 	
-	public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
-	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
-	public final static int GAME_HIEGHT = TILES_SIZE * TILES_IN_HIEGHT;
+	public static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
+	public static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
+	public static int GAME_HIEGHT = TILES_SIZE * TILES_IN_HIEGHT;
 
 	public Game() {
 		initClasses();
@@ -97,7 +98,6 @@ public class Game implements Runnable {
 		double timePerUpdate = 1000000000.0 / UPS;
 
 		long previousTime = System.nanoTime();
-
 		int frames = 0;
 		int updates = 0;
 		long lastSecond = System.currentTimeMillis();
@@ -132,7 +132,29 @@ public class Game implements Runnable {
 		}
 	}
 
+	public static void updateScale(float newScale) {
+		SCALE = newScale;
+		TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
+		GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
+		GAME_HIEGHT = TILES_SIZE * TILES_IN_HIEGHT;
+	}
+
 	public void applyResolution() {
+		int height = Settings.getWindowHeight();
+		if (height >= 1080) {
+			updateScale(3f);
+		} else if (height >= 720) {
+			updateScale(2f);
+		} else {
+			updateScale(1f);
+		}
+		
+		// Re-instantiate all states so their UI elements recalculate their new scaled positions
+		audioOptions = new AudioOptions(this);
+		menu = new Menu(this);
+		gameOptions = new GameOptions(this);
+		playing.reloadUI();
+
 		gamePanel.setPanelSize();
 		gameWindow.applyResolution(gamePanel);
 	}
@@ -142,23 +164,9 @@ public class Game implements Runnable {
 			playing.getPlayer().resetBooleans();
 	}
 
-	public Menu getMenu() {
-		return menu;
-	}
-	
-	public Playing getPlaying() {
-		return playing;
-	}
-	
-	public GameOptions getGameOptions() {
-		return gameOptions;
-	}
-	
-	public AudioOptions getAudioOptions() {
-		return audioOptions;
-	}
-
-	public AudioPlayer getAudioPlayer() {
-		return audioPlayer;
-	}
+	public Menu getMenu() { return menu; }
+	public Playing getPlaying() { return playing; }
+	public GameOptions getGameOptions() { return gameOptions; }
+	public AudioOptions getAudioOptions() { return audioOptions; }
+	public AudioPlayer getAudioPlayer() { return audioPlayer; }
 }

@@ -1,8 +1,5 @@
 package main;
 
-import static main.Game.GAME_HIEGHT;
-import static main.Game.GAME_WIDTH;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -36,19 +33,18 @@ public class GamePanel extends JPanel {
 		setPreferredSize(dim);
 	}
 
-	public void updateGame() {
-	}
+	public void updateGame() {}
 
 	private double getRenderScale() {
-		return Math.min((double) getWidth() / GAME_WIDTH, (double) getHeight() / GAME_HIEGHT);
+		return Math.min((double) getWidth() / Game.GAME_WIDTH, (double) getHeight() / Game.GAME_HIEGHT);
 	}
 
 	private int getRenderOffsetX(double scale) {
-		return (int) ((getWidth() - GAME_WIDTH * scale) / 2);
+		return (int) ((getWidth() - Game.GAME_WIDTH * scale) / 2);
 	}
 
 	private int getRenderOffsetY(double scale) {
-		return (int) ((getHeight() - GAME_HIEGHT * scale) / 2);
+		return (int) ((getHeight() - Game.GAME_HIEGHT * scale) / 2);
 	}
 
 	public MouseEvent toGameEvent(MouseEvent e) {
@@ -77,13 +73,11 @@ public class GamePanel extends JPanel {
 		g2.translate(getRenderOffsetX(scale), getRenderOffsetY(scale));
 		g2.scale(scale, scale);
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, scale < 1.0 ? RenderingHints.VALUE_INTERPOLATION_BILINEAR : RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-		g2.setClip(0, 0, GAME_WIDTH, GAME_HIEGHT);
+		g2.setClip(0, 0, Game.GAME_WIDTH, Game.GAME_HIEGHT);
 
 		game.render(g2);
 		g2.dispose();
 	}
 	
-	public Game getGame() {
-		return game;
-	}
+	public Game getGame() { return game; }
 }

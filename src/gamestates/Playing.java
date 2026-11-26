@@ -31,10 +31,10 @@ public class Playing extends State implements StateMethods {
 	private LevelCompletedOverlay levelCompletedOverlay;
 	private boolean paused = false;
 
-	private int xLvlOffset; // how many tiles over the border to shift the level
-	private int leftBorder = (int) (0.2 * Game.GAME_WIDTH); // the left border to determine offset
-	private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);// the right border to determine offset
-	private int maxLevelOffsetX; // = maxTilesOffset * Game.TILES_SIZE; // turn maxTilesOffset into pixels
+	private int xLvlOffset;
+	private int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
+	private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);
+	private int maxLevelOffsetX;
 
 	private BufferedImage horizonImg, bigCloud, smallCloud;
 	private int[] smallCloudsPosition;
@@ -42,7 +42,6 @@ public class Playing extends State implements StateMethods {
 
 	private boolean gameOver;
 	private boolean lvlCompleted;
-	
 	private boolean playerDying = false;
 
 	public Playing(Game game) {
@@ -58,6 +57,13 @@ public class Playing extends State implements StateMethods {
 		
 		calcLvlOffset();
 		loadStartLevel();
+	}
+	
+	// ADD THIS METHOD TO FIX RESIZING WITHOUT RESTARTING THE LEVEL
+	public void reloadUI() {
+		pauseOverlay = new PauseOverlay(this);
+		gameOverOverlay = new GameOverOverlay(this);
+		levelCompletedOverlay = new LevelCompletedOverlay(this);
 	}
 	
 	public void loadNextLevel() {
@@ -82,9 +88,7 @@ public class Playing extends State implements StateMethods {
 		player = new Player(200, 200, (int) (64 * Game.SCALE), (int) (40 * Game.SCALE), this);
 		player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
 		player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
-		pauseOverlay = new PauseOverlay(this);
-		gameOverOverlay = new GameOverOverlay(this);
-		levelCompletedOverlay = new LevelCompletedOverlay(this);
+		reloadUI();
 	}
 
 	@Override
@@ -180,7 +184,6 @@ public class Playing extends State implements StateMethods {
 
 	public void checkSpikesTouched(Player p) {
 		objectManager.checkSpikesTouched(p);
-		
 	}
 
 	public void setLevelCompleted(boolean levelCompleted) {
@@ -188,6 +191,7 @@ public class Playing extends State implements StateMethods {
 		if(levelCompleted)
 			game.getAudioPlayer().levelCompleted();
 	}
+	
 	public void mouseDragged(MouseEvent e) {
 		if (!gameOver)
 			if (paused)
@@ -199,9 +203,8 @@ public class Playing extends State implements StateMethods {
 		if (!gameOver) {
 			if (e.getButton() == MouseEvent.BUTTON1)
 				player.setAttacking(true);
-			else if(e.getButton() == MouseEvent.BUTTON3) // note: button 2 is scroll wheel so use button 3 for right click (this made me go insane lol)
+			else if(e.getButton() == MouseEvent.BUTTON3)
 				player.powerAttack();
-				
 		}
 	}
 
@@ -243,7 +246,6 @@ public class Playing extends State implements StateMethods {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
 		if (gameOver)
 			gameOverOverlay.keyPressed(e);
 		else
@@ -268,7 +270,6 @@ public class Playing extends State implements StateMethods {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-
 		if (!gameOver) {
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_A:
@@ -296,18 +297,10 @@ public class Playing extends State implements StateMethods {
 		player.resetBooleans();
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
-	public EnemyManager getEnemyManager() {
-		return enemyManager;
-	}
-	public ObjectManager getObjectManager() {
-		return objectManager;
-	}
-	public LevelManager getLevelManager() {
-		return levelManager;
-	}
+	public Player getPlayer() { return player; }
+	public EnemyManager getEnemyManager() { return enemyManager; }
+	public ObjectManager getObjectManager() { return objectManager; }
+	public LevelManager getLevelManager() { return levelManager; }
 
 	public void setPlayerDying(boolean playerDying) {
 		this.playerDying = playerDying;

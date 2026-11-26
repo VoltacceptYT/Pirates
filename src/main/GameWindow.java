@@ -36,7 +36,7 @@ public class GameWindow {
 	public void applyResolution(GamePanel gamePanel) {
 		gamePanel.setPreferredSize(new Dimension(Settings.getWindowWidth(), Settings.getWindowHeight()));
 		jframe.pack();
-		jframe.setSize(Settings.getWindowWidth(), Settings.getWindowHeight());
+		jframe.setSize(Settings.getWindowWidth(), Settings.getWindowHeight()); // Forces JFrame to actually update size
 		jframe.setLocationRelativeTo(null);
 		gamePanel.requestFocusInWindow();
 	}

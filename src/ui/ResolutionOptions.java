@@ -11,7 +11,6 @@ import utils.Settings;
 
 public class ResolutionOptions {
 
-	// SLICING DIMENSIONS (Matches your 3x/1080p sprite sheet)
 	private static final int BTN_SLICE = 42;          
 	private static final int PLAQUE_W_SLICE = 213;    
 	private static final int PLAQUE_H_SLICE = 36;     
@@ -30,7 +29,6 @@ public class ResolutionOptions {
 		this.game = game;
 		loadImgs();
 
-		// RENDERING DIMENSIONS (Uses Game.SCALE to match the 1080p base)
 		int arrowSize = (int) (14 * Game.SCALE);
 		int labelWidth = (int) (71 * Game.SCALE);
 		int labelHeight = (int) (12 * Game.SCALE);
@@ -59,8 +57,7 @@ public class ResolutionOptions {
 			glyphImgs[i] = atlas.getSubimage(i * GLYPH_W_SLICE, BTN_SLICE * 2 + PLAQUE_H_SLICE, GLYPH_W_SLICE, GLYPH_H_SLICE);
 	}
 
-	public void update() {
-	}
+	public void update() {}
 
 	public void draw(Graphics g) {
 		g.drawImage(plaqueImg, labelBounds.x, labelBounds.y, labelBounds.width, labelBounds.height, null);
@@ -77,8 +74,7 @@ public class ResolutionOptions {
 	private void drawLabel(Graphics g) {
 		String text = Settings.getResolutionLabel();
 		int paren = text.indexOf(' ');
-		if (paren > 0)
-			text = text.substring(0, paren);
+		if (paren > 0) text = text.substring(0, paren);
 
 		int glyphW = (int) (3 * Game.SCALE);
 		int glyphH = (int) (5 * Game.SCALE);
@@ -90,24 +86,19 @@ public class ResolutionOptions {
 		
 		for (char c : text.toCharArray()) {
 			int idx = GLYPHS.indexOf(c);
-			if (idx >= 0)
-				g.drawImage(glyphImgs[idx], x, y, glyphW, glyphH, null);
+			if (idx >= 0) g.drawImage(glyphImgs[idx], x, y, glyphW, glyphH, null);
 			x += glyphW + gap;
 		}
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if (leftBounds.contains(e.getX(), e.getY()))
-			leftPressed = true;
-		else if (rightBounds.contains(e.getX(), e.getY()))
-			rightPressed = true;
+		if (leftBounds.contains(e.getX(), e.getY())) leftPressed = true;
+		else if (rightBounds.contains(e.getX(), e.getY())) rightPressed = true;
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (leftPressed && leftBounds.contains(e.getX(), e.getY()))
-			changeResolution(-1);
-		else if (rightPressed && rightBounds.contains(e.getX(), e.getY()))
-			changeResolution(1);
+		if (leftPressed && leftBounds.contains(e.getX(), e.getY())) changeResolution(-1);
+		else if (rightPressed && rightBounds.contains(e.getX(), e.getY())) changeResolution(1);
 
 		leftPressed = false;
 		rightPressed = false;
