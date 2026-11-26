@@ -9,13 +9,8 @@ import gamestates.Menu;
 import gamestates.Playing;
 import ui.AudioOptions;
 import utils.LoadSave;
+import utils.Settings;
 
-/**
- * The Game class will handle all other entities within the entire game.
- * 
- * @author Greg
- *
- */
 public class Game implements Runnable {
 	private GameWindow gameWindow;
 	private GamePanel gamePanel;
@@ -30,12 +25,17 @@ public class Game implements Runnable {
 	private AudioPlayer audioPlayer;
 	
 	public final static int TILES_DEFAULT_SIZE = 32;
-	public final static float SCALE = 2f;
-	public final static int TILES_IN_WIDTH = 26; // visible tiles
-	public final static int TILES_IN_HIEGHT = 14; // visible tiles
-	public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);// 1.0, 1.5, 2.25, 2.5 etc to keep recommended pixel dimension ratio 
-	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
-	public final static int GAME_HIEGHT = TILES_SIZE * TILES_IN_HIEGHT;
+	public static float SCALE = 3f;
+	public final static int TILES_IN_WIDTH = 26; 
+	public final static int TILES_IN_HIEGHT = 14; 
+	
+	public static int TILES_SIZE;
+	public static int GAME_WIDTH;
+	public static int GAME_HIEGHT;
+
+	static {
+		updateScale(3f);
+	}
 
 	public Game() {
 		initClasses();
@@ -54,18 +54,14 @@ public class Game implements Runnable {
 		menu = new Menu(this);
 		playing = new Playing(this);
 		gameOptions = new GameOptions(this);
-		
 	}
 
 	private void startGameLooper() {
-		System.out.println("Game.startGameLooper()................ Starting Game Thread looper");
-		
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 
 	public void update() {
-
 		switch(Gamestate.state) {
 		case MENU:
 			menu.update();
@@ -80,12 +76,10 @@ public class Game implements Runnable {
 		default:
 			System.exit(0);
 			break;
-		
 		}
 	}
 
 	public void render(Graphics g) {
-		
 		switch(Gamestate.state) {
 		case MENU:
 			menu.draw(g);
@@ -98,7 +92,6 @@ public class Game implements Runnable {
 			break;
 		default:
 			break;
-		
 		}
 	}
 
@@ -113,12 +106,9 @@ public class Game implements Runnable {
 		int updates = 0;
 		long lastSecond = System.currentTimeMillis();
 
-		double deltaU = 0; // updates
-		double deltaF = 0; // frames
+		double deltaU = 0;
+		double deltaF = 0;
 		
-		System.out.println("=============================================================================");
-		System.out.println("======================== GAME: STARTED SUCCESSFULLY =========================");
-		System.out.println("=============================================================================");
 		while (true) {
 			long currentTime = System.nanoTime();
 
@@ -140,14 +130,29 @@ public class Game implements Runnable {
 
 			if (System.currentTimeMillis() - lastSecond >= 1000) {
 				lastSecond = System.currentTimeMillis();
-				System.out.println("FPS: " + frames + " | UPS: " + updates);
 				frames = 0;
 				updates = 0;
 			}
 		}
 	}
 
+	public static void updateScale(float newScale) {
+		SCALE = newScale;
+		TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
+		GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
+		GAME_HIEGHT = TILES_SIZE * TILES_IN_HIEGHT;
+	}
+
 	public void applyResolution() {
+		int height = Settings.getWindowHeight();
+		if (height >= 1080) {
+			updateScale(3f);
+		} else if (height >= 720) {
+			updateScale(2f);
+		} else {
+			updateScale(1f);
+		}
+		
 		gamePanel.setPanelSize();
 		gameWindow.applyResolution(gamePanel);
 	}

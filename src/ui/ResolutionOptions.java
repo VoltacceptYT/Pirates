@@ -11,14 +11,12 @@ import utils.Settings;
 
 public class ResolutionOptions {
 
-	// --- SLICING DIMENSIONS (3x because you upscaled the image) ---
-	// This stops the cropping.
-	private static final int BTN_SLICE = 42;          // 14 * 3
-	private static final int PLAQUE_W_SLICE = 213;    // 71 * 3
-	private static final int PLAQUE_H_SLICE = 36;     // 12 * 3
-	private static final int GLYPH_W_SLICE = 9;       // 3 * 3
-	private static final int GLYPH_H_SLICE = 15;      // 5 * 3
-	private static final int GLYPH_GAP_SLICE = 3;     // 1 * 3
+	private static final int BTN_SLICE = 42;          
+	private static final int PLAQUE_W_SLICE = 213;    
+	private static final int PLAQUE_H_SLICE = 36;     
+	private static final int GLYPH_W_SLICE = 9;       
+	private static final int GLYPH_H_SLICE = 15;      
+	private static final int GLYPH_GAP_SLICE = 3;     
 	private static final String GLYPHS = "0123456789x";
 
 	private final Game game;
@@ -31,7 +29,6 @@ public class ResolutionOptions {
 		this.game = game;
 		loadImgs();
 
-		// --- RENDERING DIMENSIONS (Original 1x sizes * Game.SCALE) ---
 		int arrowSize = (int) (14 * Game.SCALE);
 		int labelWidth = (int) (71 * Game.SCALE);
 		int labelHeight = (int) (12 * Game.SCALE);
@@ -50,7 +47,6 @@ public class ResolutionOptions {
 		leftImgs = new BufferedImage[3];
 		rightImgs = new BufferedImage[3];
 		for (int i = 0; i < 3; i++) {
-			// Grab the full 42x42 buttons
 			leftImgs[i] = atlas.getSubimage(i * BTN_SLICE, 0, BTN_SLICE, BTN_SLICE);
 			rightImgs[i] = atlas.getSubimage(i * BTN_SLICE, BTN_SLICE, BTN_SLICE, BTN_SLICE);
 		}
@@ -73,7 +69,6 @@ public class ResolutionOptions {
 
 	private void drawButton(Graphics g, BufferedImage[] imgs, Rectangle r, boolean over, boolean pressed) {
 		int index = pressed ? 2 : over ? 1 : 0;
-		// Draws the 42x42 image down to 14*Game.SCALE
 		g.drawImage(imgs[index], r.x, r.y, r.width, r.height, null);
 	}
 

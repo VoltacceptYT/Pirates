@@ -20,9 +20,8 @@ public class GamePanel extends JPanel {
 
 	private MouseInputs moustInputs;
 	private Game game;
+
 	public GamePanel(Game game) {
-		System.out.println("GamePanel.GamePanel()................. Initializing GamePanel");
-		
 		moustInputs = new MouseInputs(this);
 		this.game = game;
 		
@@ -35,11 +34,9 @@ public class GamePanel extends JPanel {
 	public void setPanelSize() {
 		Dimension dim = new Dimension(Settings.getWindowWidth(), Settings.getWindowHeight());
 		setPreferredSize(dim);
-		System.out.println("GamePanel.setPanelSize().............. SIZE ["+dim.width +"  : " + dim.height + "]");
 	}
 
 	public void updateGame() {
-
 	}
 
 	private double getRenderScale() {
@@ -65,7 +62,7 @@ public class GamePanel extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);// super class called to enable drawing graphics on JPanel
+		super.paintComponent(g);
 		
 		Graphics2D g2 = (Graphics2D) g.create();
 		g2.setColor(Color.BLACK);
