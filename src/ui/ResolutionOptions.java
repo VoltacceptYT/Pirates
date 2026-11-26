@@ -11,6 +11,7 @@ import utils.Settings;
 
 public class ResolutionOptions {
 
+	// SLICING DIMENSIONS (Matches your 3x/1080p sprite sheet)
 	private static final int BTN_SLICE = 42;          
 	private static final int PLAQUE_W_SLICE = 213;    
 	private static final int PLAQUE_H_SLICE = 36;     
@@ -29,6 +30,7 @@ public class ResolutionOptions {
 		this.game = game;
 		loadImgs();
 
+		// RENDERING DIMENSIONS (Uses Game.SCALE to match the 1080p base)
 		int arrowSize = (int) (14 * Game.SCALE);
 		int labelWidth = (int) (71 * Game.SCALE);
 		int labelHeight = (int) (12 * Game.SCALE);

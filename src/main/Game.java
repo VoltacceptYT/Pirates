@@ -25,17 +25,13 @@ public class Game implements Runnable {
 	private AudioPlayer audioPlayer;
 	
 	public final static int TILES_DEFAULT_SIZE = 32;
-	public static float SCALE = 3f;
+	public final static float SCALE = 3f; // FIXED: Set to 3f for 1080p base
 	public final static int TILES_IN_WIDTH = 26; 
 	public final static int TILES_IN_HIEGHT = 14; 
 	
-	public static int TILES_SIZE;
-	public static int GAME_WIDTH;
-	public static int GAME_HIEGHT;
-
-	static {
-		updateScale(3f);
-	}
+	public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
+	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
+	public final static int GAME_HIEGHT = TILES_SIZE * TILES_IN_HIEGHT;
 
 	public Game() {
 		initClasses();
@@ -136,23 +132,7 @@ public class Game implements Runnable {
 		}
 	}
 
-	public static void updateScale(float newScale) {
-		SCALE = newScale;
-		TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
-		GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
-		GAME_HIEGHT = TILES_SIZE * TILES_IN_HIEGHT;
-	}
-
 	public void applyResolution() {
-		int height = Settings.getWindowHeight();
-		if (height >= 1080) {
-			updateScale(3f);
-		} else if (height >= 720) {
-			updateScale(2f);
-		} else {
-			updateScale(1f);
-		}
-		
 		gamePanel.setPanelSize();
 		gameWindow.applyResolution(gamePanel);
 	}
