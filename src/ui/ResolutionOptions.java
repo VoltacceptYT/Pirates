@@ -9,29 +9,17 @@ import main.Game;
 import utils.LoadSave;
 import utils.Settings;
 
-/**
- * Resolution selector: [<] [ 1280x720 ] [>]
- */
 public class ResolutionOptions {
 
-	// --- SLICING DIMENSIONS (Fixed at 3x because your sprite sheet is 3x) ---
-	// DO NOT change these to Game.SCALE, or the image will be cut in half!
-	private static final int IMG_SCALE = 3;
-	private static final int BTN = 14 * IMG_SCALE; 
-	private static final int PLAQUE_W = 71 * IMG_SCALE; 
-	private static final int PLAQUE_H = 12 * IMG_SCALE; 
-	private static final int GLYPH_W = 3 * IMG_SCALE; 
-	private static final int GLYPH_H = 5 * IMG_SCALE; 
-	private static final int GLYPH_GAP = 1 * IMG_SCALE; 
+	// --- SLICING DIMENSIONS (3x because you upscaled the image) ---
+	// This stops the cropping.
+	private static final int BTN_SLICE = 42;          // 14 * 3
+	private static final int PLAQUE_W_SLICE = 213;    // 71 * 3
+	private static final int PLAQUE_H_SLICE = 36;     // 12 * 3
+	private static final int GLYPH_W_SLICE = 9;       // 3 * 3
+	private static final int GLYPH_H_SLICE = 15;      // 5 * 3
+	private static final int GLYPH_GAP_SLICE = 3;     // 1 * 3
 	private static final String GLYPHS = "0123456789x";
-
-	// --- RENDERING DIMENSIONS (The base 480p sizes, multiplied by Game.SCALE) ---
-	private static final int BTN_ORIG = 14;
-	private static final int PLAQUE_W_ORIG = 71;
-	private static final int PLAQUE_H_ORIG = 12;
-	private static final int GLYPH_W_ORIG = 3;
-	private static final int GLYPH_H_ORIG = 5;
-	private static final int GLYPH_GAP_ORIG = 1;
 
 	private final Game game;
 	private final Rectangle leftBounds, rightBounds, labelBounds;
@@ -43,12 +31,11 @@ public class ResolutionOptions {
 		this.game = game;
 		loadImgs();
 
-		// These dynamic values will now correctly adjust to 1, 2, or 3 based on resolution!
-		int arrowSize = (int) (BTN_ORIG * Game.SCALE);
-		int labelWidth = (int) (PLAQUE_W_ORIG * Game.SCALE);
-		int labelHeight = (int) (PLAQUE_H_ORIG * Game.SCALE);
+		// --- RENDERING DIMENSIONS (Original 1x sizes * Game.SCALE) ---
+		int arrowSize = (int) (14 * Game.SCALE);
+		int labelWidth = (int) (71 * Game.SCALE);
+		int labelHeight = (int) (12 * Game.SCALE);
 		int gap = (int) (4 * Game.SCALE);
-		
 		int totalWidth = arrowSize * 2 + labelWidth + gap * 2;
 		int startX = centerX - totalWidth / 2;
 
@@ -63,15 +50,15 @@ public class ResolutionOptions {
 		leftImgs = new BufferedImage[3];
 		rightImgs = new BufferedImage[3];
 		for (int i = 0; i < 3; i++) {
-			// Slicing using the 3x dimensions (BTN)
-			leftImgs[i] = atlas.getSubimage(i * BTN, 0, BTN, BTN);
-			rightImgs[i] = atlas.getSubimage(i * BTN, BTN, BTN, BTN);
+			// Grab the full 42x42 buttons
+			leftImgs[i] = atlas.getSubimage(i * BTN_SLICE, 0, BTN_SLICE, BTN_SLICE);
+			rightImgs[i] = atlas.getSubimage(i * BTN_SLICE, BTN_SLICE, BTN_SLICE, BTN_SLICE);
 		}
-		plaqueImg = atlas.getSubimage(0, BTN * 2, PLAQUE_W, PLAQUE_H);
+		plaqueImg = atlas.getSubimage(0, BTN_SLICE * 2, PLAQUE_W_SLICE, PLAQUE_H_SLICE);
 
 		glyphImgs = new BufferedImage[GLYPHS.length()];
 		for (int i = 0; i < glyphImgs.length; i++)
-			glyphImgs[i] = atlas.getSubimage(i * GLYPH_W, BTN * 2 + PLAQUE_H, GLYPH_W, GLYPH_H);
+			glyphImgs[i] = atlas.getSubimage(i * GLYPH_W_SLICE, BTN_SLICE * 2 + PLAQUE_H_SLICE, GLYPH_W_SLICE, GLYPH_H_SLICE);
 	}
 
 	public void update() {
@@ -86,7 +73,7 @@ public class ResolutionOptions {
 
 	private void drawButton(Graphics g, BufferedImage[] imgs, Rectangle r, boolean over, boolean pressed) {
 		int index = pressed ? 2 : over ? 1 : 0;
-		// Draws the 3x image but scales it down to 2x (720p) or 1x (480p) automatically
+		// Draws the 42x42 image down to 14*Game.SCALE
 		g.drawImage(imgs[index], r.x, r.y, r.width, r.height, null);
 	}
 
@@ -96,14 +83,14 @@ public class ResolutionOptions {
 		if (paren > 0)
 			text = text.substring(0, paren);
 
-		// Calculates text size dynamically based on Game.SCALE
-		int glyphW = (int) (GLYPH_W_ORIG * Game.SCALE);
-		int glyphH = (int) (GLYPH_H_ORIG * Game.SCALE);
-		int gap = (int) (GLYPH_GAP_ORIG * Game.SCALE);
+		int glyphW = (int) (3 * Game.SCALE);
+		int glyphH = (int) (5 * Game.SCALE);
+		int gap = (int) (1 * Game.SCALE);
 		int totalW = text.length() * glyphW + (text.length() - 1) * gap;
 
 		int x = labelBounds.x + (labelBounds.width - totalW) / 2;
-		int y = labelBounds.y + (int) (3 * Game.SCALE); // 3px from top (scaled)
+		int y = labelBounds.y + (int) (3 * Game.SCALE); 
+		
 		for (char c : text.toCharArray()) {
 			int idx = GLYPHS.indexOf(c);
 			if (idx >= 0)
