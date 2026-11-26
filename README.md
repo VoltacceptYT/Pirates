@@ -2,7 +2,7 @@
 
 Lets Play 2D is a side scrolling platform Game build entirely in Java. 
 
-Download `Pirates.jar` from the ![Build Status](https://github.com/VoltacceptYT/Pirates/actions/workflows/main.yml/badge.svg) (requires Java 17+) and double-click it to play.
+Download `Pirates.jar` from the ![Build Status](https://github.com/VoltacceptYT/Pirates/actions/workflows/build.yml/badge.svg) (requires Java 17+) and double-click it to play.
 
 Or from a terminal: `java -jar Pirates.jar`
 
