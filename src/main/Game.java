@@ -2,8 +2,6 @@ package main;
 
 import java.awt.Graphics;
 
-import com.sun.media.jfxmedia.AudioClip;
-
 import audio.AudioPlayer;
 import gamestates.GameOptions;
 import gamestates.Gamestate;
