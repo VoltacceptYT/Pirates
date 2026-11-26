@@ -1,11 +1,10 @@
 package utils;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -53,36 +52,22 @@ public class LoadSave {
 	}
 	
 	public static BufferedImage[] GetAllLevels() {
-		URL url = LoadSave.class.getResource("/lvls");
-		File file = null;
-		
-		try {
-			file = new File(url.toURI());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-		
-		File[] files = file.listFiles();
-		File[] filesSorted = new File[files.length];
-		
-		for (int i = 0; i < filesSorted.length; i++) {
-			for (int j = 0; j < files.length; j++) {
-				if(files[j].getName().equals((i + 1) + ".png"))
-					filesSorted[i] = files[j];
-			}
-		}
-
-		BufferedImage[] imgs = new BufferedImage[filesSorted.length]; 
-		
-		for (int i = 0; i < imgs.length; i++) {
-			try {
-				imgs[i] = ImageIO.read(filesSorted[i]);
+		// Reads /lvls/1.png, /lvls/2.png, ... from the classpath until one is missing.
+		// Works both from an IDE and from inside a packaged .jar (no File access).
+		List<BufferedImage> levels = new ArrayList<>();
+		int i = 1;
+		while (true) {
+			try (InputStream is = LoadSave.class.getResourceAsStream("/lvls/" + i + ".png")) {
+				if (is == null)
+					break;
+				levels.add(ImageIO.read(is));
 			} catch (IOException e) {
 				e.printStackTrace();
+				break;
 			}
+			i++;
 		}
-		return imgs;
+		return levels.toArray(new BufferedImage[0]);
 	}
-
 
 }
