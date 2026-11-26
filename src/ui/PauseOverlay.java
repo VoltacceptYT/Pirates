@@ -24,7 +24,7 @@ public class PauseOverlay {
 		this.playing = playing;
 		loadBackground();
 		audioOptions = playing.getGame().getAudioOptions();
-		resolutionOptions = new ResolutionOptions(playing.getGame(), Game.GAME_WIDTH / 2, (int) (324 * Game.SCALE));
+		resolutionOptions = new ResolutionOptions(playing.getGame(), Game.GAME_WIDTH / 2, (int) (310 * Game.SCALE));
 		createUrmButtons();
 	}
 

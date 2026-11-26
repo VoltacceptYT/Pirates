@@ -28,7 +28,7 @@ public class GameOptions extends State implements StateMethods{
 		loadImgs();
 		loadButton();
 		audioOptions = game.getAudioOptions();
-		resolutionOptions = new ResolutionOptions(game, Game.GAME_WIDTH / 2, (int) (325 * Game.SCALE));
+		resolutionOptions = new ResolutionOptions(game, Game.GAME_WIDTH / 2, (int) (310 * Game.SCALE));
 	}
 
 	private void loadButton() {
