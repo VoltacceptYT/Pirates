@@ -24,26 +24,28 @@ public class PauseOverlay {
 		this.playing = playing;
 		loadBackground();
 		audioOptions = playing.getGame().getAudioOptions();
-		resolutionOptions = new ResolutionOptions(playing.getGame(), Game.GAME_WIDTH / 2, (int) (108 * Game.SCALE));
+		resolutionOptions = new ResolutionOptions(playing.getGame(), Game.GAME_WIDTH / 2, (int) (340 * Game.SCALE));
 		createUrmButtons();
 	}
 
 	private void createUrmButtons() {
-		int buttonY = (int) (116 * Game.SCALE);
-		int spacing = (int) (30 * Game.SCALE);
-		int startX = Game.GAME_WIDTH / 2 - spacing - URM_SIZE / 2;
+		int menuX = (int) (312 * Game.SCALE);
+		int replayX = (int) (392 * Game.SCALE);
+		int unpauseX = (int) (476 * Game.SCALE);
+		int buttonY = (int) (380 * Game.SCALE);
+		int btnSize = (int) (44 * Game.SCALE);
 		
-		menuButton = new UrmButton(startX, buttonY, URM_SIZE, URM_SIZE, 2);
-		replayButton = new UrmButton(startX + spacing, buttonY, URM_SIZE, URM_SIZE, 1);
-		unpauseButton = new UrmButton(startX + spacing * 2, buttonY, URM_SIZE, URM_SIZE, 0);
+		menuButton = new UrmButton(menuX, buttonY, btnSize, btnSize, 2);
+		replayButton = new UrmButton(replayX, buttonY, btnSize, btnSize, 1);
+		unpauseButton = new UrmButton(unpauseX, buttonY, btnSize, btnSize, 0);
 	}
 
 	private void loadBackground() {
 		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PAUSE_BACKGROUND);
-		bgW = (int) (backgroundImg.getWidth() * Game.SCALE * utils.Constants.UI.COMPACT);
-		bgH = (int) (backgroundImg.getHeight() * Game.SCALE * utils.Constants.UI.COMPACT);
+		bgW = (int) (backgroundImg.getWidth() * Game.SCALE);
+		bgH = (int) (backgroundImg.getHeight() * Game.SCALE);
 		bgX = (int) (Game.GAME_WIDTH / 2 - bgW / 2);
-		bgY = (int) (8 * Game.SCALE);
+		bgY = (int) (25 * Game.SCALE);
 	}
 
 	public void update() {

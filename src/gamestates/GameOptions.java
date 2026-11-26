@@ -28,21 +28,22 @@ public class GameOptions extends State implements StateMethods{
 		loadImgs();
 		loadButton();
 		audioOptions = game.getAudioOptions();
-		resolutionOptions = new ResolutionOptions(game, Game.GAME_WIDTH / 2, (int) (108 * Game.SCALE));
+		resolutionOptions = new ResolutionOptions(game, Game.GAME_WIDTH / 2, (int) (336 * Game.SCALE));
 	}
 
 	private void loadButton() {
-		int menuX = Game.GAME_WIDTH / 2 - URM_SIZE / 2;
-		int menuY = (int) (117 * Game.SCALE);
-		menuB = new UrmButton(menuX, menuY, URM_SIZE, URM_SIZE, 2);
+		int menuX = (int) (392 * Game.SCALE);
+		int menuY = (int) (384 * Game.SCALE);
+		int btnSize = (int) (48 * Game.SCALE);
+		menuB = new UrmButton(menuX, menuY, btnSize, btnSize, 2);
 	}
 
 	private void loadImgs() {
 		optionsBackgroundImg = LoadSave.GetSpriteAtlas(LoadSave.OPTIONS_MENU);
-		bgW = (int) (optionsBackgroundImg.getWidth() * Game.SCALE * utils.Constants.UI.COMPACT);
-		bgH = (int) (optionsBackgroundImg.getHeight() * Game.SCALE * utils.Constants.UI.COMPACT);
+		bgW = (int) (optionsBackgroundImg.getWidth() * Game.SCALE);
+		bgH = (int) (optionsBackgroundImg.getHeight() * Game.SCALE);
 		bgX = (int) (Game.GAME_WIDTH / 2 - bgW / 2);
-		bgY = (int) (11 * Game.SCALE);
+		bgY = (int) (33 * Game.SCALE);
 	}
 
 	@Override

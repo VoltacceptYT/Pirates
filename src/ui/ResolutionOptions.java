@@ -30,10 +30,10 @@ public class ResolutionOptions {
 		loadImgs();
 
 		
-		int arrowSize = (int) (14 * Game.SCALE);
-		int labelWidth = (int) (71 * Game.SCALE);
-		int labelHeight = (int) (12 * Game.SCALE);
-		int gap = (int) (4 * Game.SCALE);
+		int arrowSize = (int) (28 * Game.SCALE);
+		int labelWidth = (int) (144 * Game.SCALE);
+		int labelHeight = (int) (24 * Game.SCALE);
+		int gap = (int) (8 * Game.SCALE);
 		int totalWidth = arrowSize * 2 + labelWidth + gap * 2;
 		int startX = centerX - totalWidth / 2;
 
@@ -77,13 +77,13 @@ public class ResolutionOptions {
 		int paren = text.indexOf(' ');
 		if (paren > 0) text = text.substring(0, paren);
 
-		int glyphW = (int) (3 * Game.SCALE);
-		int glyphH = (int) (5 * Game.SCALE);
-		int gap = (int) (1 * Game.SCALE);
+		int glyphW = (int) (6 * Game.SCALE);
+		int glyphH = (int) (10 * Game.SCALE);
+		int gap = (int) (2 * Game.SCALE);
 		int totalW = text.length() * glyphW + (text.length() - 1) * gap;
 
 		int x = labelBounds.x + (labelBounds.width - totalW) / 2;
-		int y = labelBounds.y + (int) (3 * Game.SCALE); 
+		int y = labelBounds.y + (int) (6 * Game.SCALE); 
 		
 		for (char c : text.toCharArray()) {
 			int idx = GLYPHS.indexOf(c);
