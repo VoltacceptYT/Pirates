@@ -32,8 +32,8 @@ public class Playing extends State implements StateMethods {
 	private boolean paused = false;
 
 	private int xLvlOffset;
-	private int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
-	private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);
+	private int leftBorder;
+	private int rightBorder;
 	private int maxLevelOffsetX;
 
 	private BufferedImage horizonImg, bigCloud, smallCloud;
@@ -61,6 +61,8 @@ public class Playing extends State implements StateMethods {
 	
 	// ADD THIS METHOD TO FIX RESIZING WITHOUT RESTARTING THE LEVEL
 	public void reloadUI() {
+		leftBorder = (int) (0.2 * Game.GAME_WIDTH);
+		rightBorder = (int) (0.8 * Game.GAME_WIDTH);
 		pauseOverlay = new PauseOverlay(this);
 		gameOverOverlay = new GameOverOverlay(this);
 		levelCompletedOverlay = new LevelCompletedOverlay(this);
@@ -88,6 +90,8 @@ public class Playing extends State implements StateMethods {
 		player = new Player(200, 200, (int) (64 * Game.SCALE), (int) (40 * Game.SCALE), this);
 		player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
 		player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
+		leftBorder = (int) (0.2 * Game.GAME_WIDTH);
+		rightBorder = (int) (0.8 * Game.GAME_WIDTH);
 		reloadUI();
 	}
 

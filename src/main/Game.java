@@ -35,6 +35,16 @@ public class Game implements Runnable {
 	public static int GAME_HIEGHT = TILES_SIZE * TILES_IN_HIEGHT;
 
 	public Game() {
+		// Apply saved resolution scale before creating any UI that depends on SCALE
+		int height = Settings.getWindowHeight();
+		if (height >= 1080) {
+			updateScale(3f);
+		} else if (height >= 720) {
+			updateScale(2f);
+		} else {
+			updateScale(1f);
+		}
+
 		initClasses();
 
 		gamePanel = new GamePanel(this);
@@ -137,6 +147,7 @@ public class Game implements Runnable {
 		TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
 		GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
 		GAME_HIEGHT = TILES_SIZE * TILES_IN_HIEGHT;
+		utils.Constants.update();
 	}
 
 	public void applyResolution() {

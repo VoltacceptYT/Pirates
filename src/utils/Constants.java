@@ -4,15 +4,15 @@ import main.Game;
 
 public class Constants {
 	
-	public final static float GRAVITY = 0.04f * Game.SCALE;
+	public static float GRAVITY = 0.04f * Game.SCALE;
 	public final static int ANI_SPEED = 25;
 	
 	public static class Projectiles {
 		public static final int CANNON_BALL_WIDTH_DEFAULT = 15;
 		public static final int CANNON_BALL_HEIGHT_DEFUALT = 15;
-		public static final int CANNON_BALL_WIDTH = (int) (CANNON_BALL_WIDTH_DEFAULT * Game.SCALE);
-		public static final int CANNON_BALL_HEIGHT = (int) (CANNON_BALL_HEIGHT_DEFUALT * Game.SCALE);
-		public static final float SPEED = 0.75f * Game.SCALE;		
+		public static int CANNON_BALL_WIDTH = (int) (CANNON_BALL_WIDTH_DEFAULT * Game.SCALE);
+		public static int CANNON_BALL_HEIGHT = (int) (CANNON_BALL_HEIGHT_DEFUALT * Game.SCALE);
+		public static float SPEED = 0.75f * Game.SCALE;		
 	}
 	
 	public static class ObjectConstants {
@@ -30,23 +30,23 @@ public class Constants {
 		
 		public static final int CONTAINER_WIDTH_DEFAULT = 40;
 		public static final int CONTAINER_HEIGHT_DEFAULT = 30;
-		public static final int CONTAINER_WIDTH = (int) (Game.SCALE * CONTAINER_WIDTH_DEFAULT);
-		public static final int CONTAINER_HEIGHT = (int) (Game.SCALE * CONTAINER_HEIGHT_DEFAULT);
+		public static int CONTAINER_WIDTH = (int) (Game.SCALE * CONTAINER_WIDTH_DEFAULT);
+		public static int CONTAINER_HEIGHT = (int) (Game.SCALE * CONTAINER_HEIGHT_DEFAULT);
 		
 		public static final int POTION_WIDTH_DEFAULT = 12;
 		public static final int POTION_HEIGHT_DEFAULT = 16;
-		public static final int POTION_WIDTH = (int) (Game.SCALE * POTION_WIDTH_DEFAULT);
-		public static final int POTION_HEIGHT = (int) (Game.SCALE * POTION_HEIGHT_DEFAULT);
+		public static int POTION_WIDTH = (int) (Game.SCALE * POTION_WIDTH_DEFAULT);
+		public static int POTION_HEIGHT = (int) (Game.SCALE * POTION_HEIGHT_DEFAULT);
 		
 		public static final int SPIKE_WIDTH_DEFAULT = 32;
 		public static final int SPIKE_HEIGHT_DEFAULT = 32;
-		public static final int SPIKE_WIDTH = (int) (Game.SCALE * SPIKE_WIDTH_DEFAULT);
-		public static final int SPIKE_HEIGHT = (int) (Game.SCALE * SPIKE_HEIGHT_DEFAULT);
+		public static int SPIKE_WIDTH = (int) (Game.SCALE * SPIKE_WIDTH_DEFAULT);
+		public static int SPIKE_HEIGHT = (int) (Game.SCALE * SPIKE_HEIGHT_DEFAULT);
 		
 		public static final int CANNON_WIDTH_DEFAULT = 40;
 		public static final int CANNON_HEIGHT_DEFUALT = 26;
-		public static final int CANNON_WIDTH = (int) (CANNON_WIDTH_DEFAULT * Game.SCALE);
-		public static final int CANNON_HEIGHT = (int) (CANNON_HEIGHT_DEFUALT * Game.SCALE);
+		public static int CANNON_WIDTH = (int) (CANNON_WIDTH_DEFAULT * Game.SCALE);
+		public static int CANNON_HEIGHT = (int) (CANNON_HEIGHT_DEFUALT * Game.SCALE);
 		
 		public static int GetSpriteAmount(int objType) {
 			switch(objType) {
@@ -78,10 +78,10 @@ public class Constants {
 		public static final int DEAD = 4;
 		public static final int CRABBY_WIDTH_DEFAULT = 72;
 		public static final int CRABBY_HEIGHT_DEFAULT = 32;
-		public static final int CRABBY_WIDTH = (int) (CRABBY_WIDTH_DEFAULT * Game.SCALE);
-		public static final int CRABBY_HEIGHT = (int) (CRABBY_HEIGHT_DEFAULT * Game.SCALE);
-		public static final int CRABBY_DRAWOFFSET_X = (int) (26 * Game.SCALE);
-		public static final int CRABBY_DRAWOFFSET_Y = (int) (9 * Game.SCALE);
+		public static int CRABBY_WIDTH = (int) (CRABBY_WIDTH_DEFAULT * Game.SCALE);
+		public static int CRABBY_HEIGHT = (int) (CRABBY_HEIGHT_DEFAULT * Game.SCALE);
+		public static int CRABBY_DRAWOFFSET_X = (int) (26 * Game.SCALE);
+		public static int CRABBY_DRAWOFFSET_Y = (int) (9 * Game.SCALE);
 
 		public static int GetSpriteAmount(int enemyType, int enemyState) {
 			switch(enemyType) {
@@ -124,33 +124,33 @@ public class Constants {
 		public static final int BIG_CLOUD_HEIGHT_DEFUALT = 101;
 		public static final int SMALL_CLOUD_WIDTH_DEFUALT = 74;
 		public static final int SMALL_CLOUD_HEIGHT_DEFUALT = 24;
-		public static final int BIG_CLOUD_WIDTH = (int)(BIG_CLOUD_WIDTH_DEFUALT * Game.SCALE);
-		public static final int BIG_CLOUD_HEIGHT = (int)(BIG_CLOUD_HEIGHT_DEFUALT * Game.SCALE);
-		public static final int SMALL_CLOUD_WIDTH = (int)(SMALL_CLOUD_WIDTH_DEFUALT * Game.SCALE);
-		public static final int SMALL_CLOUD_HEIGHT = (int)(SMALL_CLOUD_HEIGHT_DEFUALT * Game.SCALE);
+		public static int BIG_CLOUD_WIDTH = (int)(BIG_CLOUD_WIDTH_DEFUALT * Game.SCALE);
+		public static int BIG_CLOUD_HEIGHT = (int)(BIG_CLOUD_HEIGHT_DEFUALT * Game.SCALE);
+		public static int SMALL_CLOUD_WIDTH = (int)(SMALL_CLOUD_WIDTH_DEFUALT * Game.SCALE);
+		public static int SMALL_CLOUD_HEIGHT = (int)(SMALL_CLOUD_HEIGHT_DEFUALT * Game.SCALE);
 	}
 	public static class UI {
 		public static class Buttons{
 			public static final int B_WIDTH_DEFAULT = 140;
 			public static final int B_HEIGHT_DEFAULT = 56;
-			public static final int B_WIDTH = (int) (B_WIDTH_DEFAULT * Game.SCALE);
-			public static final int B_HEIGHT = (int) (B_HEIGHT_DEFAULT * Game.SCALE);			
+			public static int B_WIDTH = (int) (B_WIDTH_DEFAULT * Game.SCALE);
+			public static int B_HEIGHT = (int) (B_HEIGHT_DEFAULT * Game.SCALE);			
 		}
 		public static class PauseButtons{
 			public static final int SOUND_SIZE_DEFAULT = 42; 
-			public static final int SOUND_SIZE = (int) (SOUND_SIZE_DEFAULT * Game.SCALE);
+			public static int SOUND_SIZE = (int) (SOUND_SIZE_DEFAULT * Game.SCALE);
 		}
 		public static class URMButtons{
 			public static final int URM_SIZE_DEFAULT = 56; 
-			public static final int URM_SIZE = (int) (URM_SIZE_DEFAULT * Game.SCALE);
+			public static int URM_SIZE = (int) (URM_SIZE_DEFAULT * Game.SCALE);
 		}
 		public static class VolumeButtons{
 			public static final int VOLUME_DEFAULT_WIDTH = 28;
 			public static final int VOLUME_DEFAULT_HEIGHT = 44;
 			public static final int SLIDER_DEFAULT_WIDTH = 215;
-			public static final int VOLUME_WIDTH = (int) (VOLUME_DEFAULT_WIDTH * Game.SCALE);
-			public static final int VOLUME_HEIGHT = (int) (VOLUME_DEFAULT_HEIGHT * Game.SCALE);
-			public static final int SLIDER_WIDTH = (int) (SLIDER_DEFAULT_WIDTH * Game.SCALE);
+			public static int VOLUME_WIDTH = (int) (VOLUME_DEFAULT_WIDTH * Game.SCALE);
+			public static int VOLUME_HEIGHT = (int) (VOLUME_DEFAULT_HEIGHT * Game.SCALE);
+			public static int SLIDER_WIDTH = (int) (SLIDER_DEFAULT_WIDTH * Game.SCALE);
 		}
 	}
 	public static class Directions {
@@ -186,5 +186,41 @@ public class Constants {
 				return 1;
 			}
 		}
+	}
+
+	/** Recalculate all scale-dependent constants after Game.SCALE changes. */
+	public static void update() {
+		GRAVITY = 0.04f * Game.SCALE;
+
+		Projectiles.CANNON_BALL_WIDTH = (int) (Projectiles.CANNON_BALL_WIDTH_DEFAULT * Game.SCALE);
+		Projectiles.CANNON_BALL_HEIGHT = (int) (Projectiles.CANNON_BALL_HEIGHT_DEFUALT * Game.SCALE);
+		Projectiles.SPEED = 0.75f * Game.SCALE;
+
+		ObjectConstants.CONTAINER_WIDTH = (int) (Game.SCALE * ObjectConstants.CONTAINER_WIDTH_DEFAULT);
+		ObjectConstants.CONTAINER_HEIGHT = (int) (Game.SCALE * ObjectConstants.CONTAINER_HEIGHT_DEFAULT);
+		ObjectConstants.POTION_WIDTH = (int) (Game.SCALE * ObjectConstants.POTION_WIDTH_DEFAULT);
+		ObjectConstants.POTION_HEIGHT = (int) (Game.SCALE * ObjectConstants.POTION_HEIGHT_DEFAULT);
+		ObjectConstants.SPIKE_WIDTH = (int) (Game.SCALE * ObjectConstants.SPIKE_WIDTH_DEFAULT);
+		ObjectConstants.SPIKE_HEIGHT = (int) (Game.SCALE * ObjectConstants.SPIKE_HEIGHT_DEFAULT);
+		ObjectConstants.CANNON_WIDTH = (int) (ObjectConstants.CANNON_WIDTH_DEFAULT * Game.SCALE);
+		ObjectConstants.CANNON_HEIGHT = (int) (ObjectConstants.CANNON_HEIGHT_DEFUALT * Game.SCALE);
+
+		EnemyConstants.CRABBY_WIDTH = (int) (EnemyConstants.CRABBY_WIDTH_DEFAULT * Game.SCALE);
+		EnemyConstants.CRABBY_HEIGHT = (int) (EnemyConstants.CRABBY_HEIGHT_DEFAULT * Game.SCALE);
+		EnemyConstants.CRABBY_DRAWOFFSET_X = (int) (26 * Game.SCALE);
+		EnemyConstants.CRABBY_DRAWOFFSET_Y = (int) (9 * Game.SCALE);
+
+		Environment.BIG_CLOUD_WIDTH = (int)(Environment.BIG_CLOUD_WIDTH_DEFUALT * Game.SCALE);
+		Environment.BIG_CLOUD_HEIGHT = (int)(Environment.BIG_CLOUD_HEIGHT_DEFUALT * Game.SCALE);
+		Environment.SMALL_CLOUD_WIDTH = (int)(Environment.SMALL_CLOUD_WIDTH_DEFUALT * Game.SCALE);
+		Environment.SMALL_CLOUD_HEIGHT = (int)(Environment.SMALL_CLOUD_HEIGHT_DEFUALT * Game.SCALE);
+
+		UI.Buttons.B_WIDTH = (int) (UI.Buttons.B_WIDTH_DEFAULT * Game.SCALE);
+		UI.Buttons.B_HEIGHT = (int) (UI.Buttons.B_HEIGHT_DEFAULT * Game.SCALE);
+		UI.PauseButtons.SOUND_SIZE = (int) (UI.PauseButtons.SOUND_SIZE_DEFAULT * Game.SCALE);
+		UI.URMButtons.URM_SIZE = (int) (UI.URMButtons.URM_SIZE_DEFAULT * Game.SCALE);
+		UI.VolumeButtons.VOLUME_WIDTH = (int) (UI.VolumeButtons.VOLUME_DEFAULT_WIDTH * Game.SCALE);
+		UI.VolumeButtons.VOLUME_HEIGHT = (int) (UI.VolumeButtons.VOLUME_DEFAULT_HEIGHT * Game.SCALE);
+		UI.VolumeButtons.SLIDER_WIDTH = (int) (UI.VolumeButtons.SLIDER_DEFAULT_WIDTH * Game.SCALE);
 	}
 }
