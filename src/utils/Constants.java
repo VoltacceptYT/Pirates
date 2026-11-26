@@ -130,6 +130,9 @@ public class Constants {
 		public static int SMALL_CLOUD_HEIGHT = (int)(SMALL_CLOUD_HEIGHT_DEFUALT * Game.SCALE);
 	}
 	public static class UI {
+		// Compact factor so options/pause UI matches the density of ResolutionOptions
+		public static final float COMPACT = 1f / 3f;
+
 		public static class Buttons{
 			public static final int B_WIDTH_DEFAULT = 140;
 			public static final int B_HEIGHT_DEFAULT = 56;
@@ -138,19 +141,19 @@ public class Constants {
 		}
 		public static class PauseButtons{
 			public static final int SOUND_SIZE_DEFAULT = 42; 
-			public static int SOUND_SIZE = (int) (SOUND_SIZE_DEFAULT * Game.SCALE);
+			public static int SOUND_SIZE = (int) (SOUND_SIZE_DEFAULT * Game.SCALE * COMPACT);
 		}
 		public static class URMButtons{
 			public static final int URM_SIZE_DEFAULT = 56; 
-			public static int URM_SIZE = (int) (URM_SIZE_DEFAULT * Game.SCALE);
+			public static int URM_SIZE = (int) (URM_SIZE_DEFAULT * Game.SCALE * COMPACT);
 		}
 		public static class VolumeButtons{
 			public static final int VOLUME_DEFAULT_WIDTH = 28;
 			public static final int VOLUME_DEFAULT_HEIGHT = 44;
 			public static final int SLIDER_DEFAULT_WIDTH = 215;
-			public static int VOLUME_WIDTH = (int) (VOLUME_DEFAULT_WIDTH * Game.SCALE);
-			public static int VOLUME_HEIGHT = (int) (VOLUME_DEFAULT_HEIGHT * Game.SCALE);
-			public static int SLIDER_WIDTH = (int) (SLIDER_DEFAULT_WIDTH * Game.SCALE);
+			public static int VOLUME_WIDTH = (int) (VOLUME_DEFAULT_WIDTH * Game.SCALE * COMPACT);
+			public static int VOLUME_HEIGHT = (int) (VOLUME_DEFAULT_HEIGHT * Game.SCALE * COMPACT);
+			public static int SLIDER_WIDTH = (int) (SLIDER_DEFAULT_WIDTH * Game.SCALE * COMPACT);
 		}
 	}
 	public static class Directions {
@@ -217,10 +220,10 @@ public class Constants {
 
 		UI.Buttons.B_WIDTH = (int) (UI.Buttons.B_WIDTH_DEFAULT * Game.SCALE);
 		UI.Buttons.B_HEIGHT = (int) (UI.Buttons.B_HEIGHT_DEFAULT * Game.SCALE);
-		UI.PauseButtons.SOUND_SIZE = (int) (UI.PauseButtons.SOUND_SIZE_DEFAULT * Game.SCALE);
-		UI.URMButtons.URM_SIZE = (int) (UI.URMButtons.URM_SIZE_DEFAULT * Game.SCALE);
-		UI.VolumeButtons.VOLUME_WIDTH = (int) (UI.VolumeButtons.VOLUME_DEFAULT_WIDTH * Game.SCALE);
-		UI.VolumeButtons.VOLUME_HEIGHT = (int) (UI.VolumeButtons.VOLUME_DEFAULT_HEIGHT * Game.SCALE);
-		UI.VolumeButtons.SLIDER_WIDTH = (int) (UI.VolumeButtons.SLIDER_DEFAULT_WIDTH * Game.SCALE);
+		UI.PauseButtons.SOUND_SIZE = (int) (UI.PauseButtons.SOUND_SIZE_DEFAULT * Game.SCALE * UI.COMPACT);
+		UI.URMButtons.URM_SIZE = (int) (UI.URMButtons.URM_SIZE_DEFAULT * Game.SCALE * UI.COMPACT);
+		UI.VolumeButtons.VOLUME_WIDTH = (int) (UI.VolumeButtons.VOLUME_DEFAULT_WIDTH * Game.SCALE * UI.COMPACT);
+		UI.VolumeButtons.VOLUME_HEIGHT = (int) (UI.VolumeButtons.VOLUME_DEFAULT_HEIGHT * Game.SCALE * UI.COMPACT);
+		UI.VolumeButtons.SLIDER_WIDTH = (int) (UI.VolumeButtons.SLIDER_DEFAULT_WIDTH * Game.SCALE * UI.COMPACT);
 	}
 }

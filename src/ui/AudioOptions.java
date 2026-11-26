@@ -22,15 +22,16 @@ public class AudioOptions {
 	}
 	
 	private void createVolumeButtons() {
-		int volumeX = (int) (309 * Game.SCALE);
-		int volumeY = (int) (250 * Game.SCALE);
+		// Centered + compact to match ResolutionOptions density
+		int volumeX = Game.GAME_WIDTH / 2 - SLIDER_WIDTH / 2;
+		int volumeY = (int) (80 * Game.SCALE);
 		volumeButton = new VolumeButton(volumeX, volumeY, SLIDER_WIDTH, VOLUME_HEIGHT);
 	}
 	
 	private void createSoundButtons() {
-		int soundX = (int) (450 * Game.SCALE);
-		int musicY = (int) (140 * Game.SCALE); // y location on menu
-		int sfxY = (int) (186 * Game.SCALE); // y location on menu
+		int soundX = Game.GAME_WIDTH / 2 + (int)(30 * Game.SCALE);
+		int musicY = (int) (47 * Game.SCALE);
+		int sfxY = (int) (62 * Game.SCALE);
 		musicButton = new SoundButton(soundX, musicY, SOUND_SIZE, SOUND_SIZE);
 		sfxButton = new SoundButton(soundX, sfxY, SOUND_SIZE, SOUND_SIZE);
 	}
