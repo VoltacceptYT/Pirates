@@ -2,7 +2,7 @@
 
 Lets Play 2D is a side scrolling platform Game build entirely in Java. 
 
-Download `Pirates.jar` from the [Actions](https://github.com/VoltacceptYT/Pirates/actions) page (requires Java 17+) and double-click it to play.
+Download `Pirates.jar` from the ![Build Status](https://github.com/OWNER/REPOSITORY/actions/workflows/main.yml/badge.svg) (requires Java 17+) and double-click it to play.
 
 Or from a terminal: `java -jar Pirates.jar`
 
@@ -25,7 +25,7 @@ Or from a terminal: `java -jar Pirates.jar`
    <details><summary>While on MENU</summary>
 
       * PLAY - Start the game on Level 1.
-      * OPTIONS - Opens the Options menu to control sound settings.
+      * OPTIONS - Opens the Options menu to control sound and resolution (480p / 720p / 1080p / 1440p, saved to settings.properties).
       * QUIT - Closes the game.
    </details>
    <details><summary>While Playing</summary>

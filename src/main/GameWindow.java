@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
+
+import utils.Settings;
 
 public class GameWindow {
 
@@ -34,6 +38,13 @@ public class GameWindow {
 				public void windowGainedFocus(WindowEvent e) {}
 			});
 
+	}
+
+	public void applyResolution(GamePanel gamePanel) {
+		gamePanel.setPreferredSize(new Dimension(Settings.getWindowWidth(), Settings.getWindowHeight()));
+		jframe.pack();
+		jframe.setLocationRelativeTo(null);
+		gamePanel.requestFocusInWindow();
 	}
 
 }

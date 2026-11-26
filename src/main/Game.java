@@ -147,6 +147,11 @@ public class Game implements Runnable {
 		}
 	}
 
+	public void applyResolution() {
+		gamePanel.setPanelSize();
+		gameWindow.applyResolution(gamePanel);
+	}
+
 	public void windowFocusLost() {
 		if(Gamestate.state == Gamestate.PLAYING)
 			playing.getPlayer().resetBooleans();

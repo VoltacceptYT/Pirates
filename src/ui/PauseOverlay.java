@@ -17,12 +17,14 @@ public class PauseOverlay {
 	private BufferedImage backgroundImg;
 	private int bgX,bgY,bgW, bgH; // width, height, x and y location for background image
 	private AudioOptions audioOptions;
+	private ResolutionOptions resolutionOptions;
 	private UrmButton menuButton, replayButton, unpauseButton;
 	
 	public PauseOverlay(Playing playing) {
 		this.playing = playing;
 		loadBackground();
 		audioOptions = playing.getGame().getAudioOptions();
+		resolutionOptions = new ResolutionOptions(playing.getGame(), Game.GAME_WIDTH / 2, (int) (324 * Game.SCALE));
 		createUrmButtons();
 	}
 
@@ -30,7 +32,7 @@ public class PauseOverlay {
 		int menuX = (int) (313 * Game.SCALE);
 		int replayX = (int) (387 * Game.SCALE);
 		int unpauseX = (int) (462 * Game.SCALE);
-		int buttonY = (int) (325 * Game.SCALE);
+		int buttonY = (int) (348 * Game.SCALE);
 		
 		menuButton = new UrmButton(menuX, buttonY, URM_SIZE, URM_SIZE, 2);
 		replayButton = new UrmButton(replayX, buttonY, URM_SIZE, URM_SIZE, 1);
@@ -58,6 +60,7 @@ public class PauseOverlay {
 		replayButton.draw(g);
 		unpauseButton.draw(g);
 		audioOptions.draw(g);
+		resolutionOptions.draw(g);
 	}
 	
 	public void mouseDragged(MouseEvent e) {
@@ -71,8 +74,10 @@ public class PauseOverlay {
 			replayButton.setMousePressed(true);
 		}else if(isIn(e,unpauseButton)) {
 			unpauseButton.setMousePressed(true);
-		}else 
+		}else {
 			audioOptions.mousePressed(e);
+			resolutionOptions.mousePressed(e);
+		}
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -92,6 +97,7 @@ public class PauseOverlay {
 				playing.unpauseGame();
 		}else {
 			audioOptions.mouseReleased(e);
+			resolutionOptions.mouseReleased(e);
 		}
 		menuButton.resetBooleans();
 		replayButton.resetBooleans();
@@ -102,6 +108,7 @@ public class PauseOverlay {
 		menuButton.setMouseOver(false);
 		replayButton.setMouseOver(false);
 		unpauseButton.setMouseOver(false);
+		resolutionOptions.mouseMoved(e);
 		if(isIn(e,menuButton)) {
 			menuButton.setMouseOver(true);
 		}else if(isIn(e,replayButton)) {

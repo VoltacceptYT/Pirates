@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import main.Game;
 import ui.AudioOptions;
 import ui.PauseButton;
+import ui.ResolutionOptions;
 import ui.UrmButton;
 import utils.LoadSave;
 
@@ -17,6 +18,7 @@ import static utils.Constants.UI.URMButtons.*;
 public class GameOptions extends State implements StateMethods{
 
 	private AudioOptions audioOptions;
+	private ResolutionOptions resolutionOptions;
 	private BufferedImage backgroundImg, optionsBackgroundImg;
 	private int bgX, bgY, bgW, bgH;
 	private UrmButton menuB;
@@ -26,11 +28,12 @@ public class GameOptions extends State implements StateMethods{
 		loadImgs();
 		loadButton();
 		audioOptions = game.getAudioOptions();
+		resolutionOptions = new ResolutionOptions(game, Game.GAME_WIDTH / 2, (int) (325 * Game.SCALE));
 	}
 
 	private void loadButton() {
 		int menuX = (int) (387 * Game.SCALE);
-		int menuY = (int) (325 * Game.SCALE);
+		int menuY = (int) (352 * Game.SCALE);
 		menuB = new UrmButton(menuX, menuY, URM_SIZE, URM_SIZE, 2);
 	}
 
@@ -59,6 +62,7 @@ public class GameOptions extends State implements StateMethods{
 		g.drawImage(optionsBackgroundImg, bgX, bgY, bgW, bgH, null);
 		menuB.draw(g);
 		audioOptions.draw(g);
+		resolutionOptions.draw(g);
 	}
 
 	public void mouseDragged(MouseEvent e) {
@@ -69,8 +73,10 @@ public class GameOptions extends State implements StateMethods{
 	public void mousePressed(MouseEvent e) {
 		if(isIn(e, menuB)) {
 			menuB.setMousePressed(true);
-		} else
+		} else {
 			audioOptions.mousePressed(e);
+			resolutionOptions.mousePressed(e);
+		}
 	}
 
 	@Override
@@ -78,8 +84,10 @@ public class GameOptions extends State implements StateMethods{
 		if(isIn(e, menuB)) {
 			if(menuB.isMousePressed())
 				Gamestate.state = Gamestate.MENU;
-		} else
+		} else {
 			audioOptions.mouseReleased(e);
+			resolutionOptions.mouseReleased(e);
+		}
 		
 		menuB.resetBooleans();
 	}
@@ -87,6 +95,7 @@ public class GameOptions extends State implements StateMethods{
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		menuB.setMouseOver(false);
+		resolutionOptions.mouseMoved(e);
 		
 		if(isIn(e, menuB)) {
 			menuB.setMouseOver(true);
